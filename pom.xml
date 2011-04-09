@@ -1,0 +1,124 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.debugproxy</groupId>
+    <artifactId>debugproxy</artifactId>
+    <packaging>jar</packaging>
+    <version>1.0</version>
+    <name>DebugProxy</name>
+    <description>DebugProxy is a high performance HTTP proxy written in Java and using the LittleProxy/Netty networking framework.  It is used to assist debugging client-side web integrations.</description>
+    <url>https://github.com/matthewbogner/DebugProxy</url>
+
+    <properties>
+       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <dependencies>
+        <dependency>
+            <groupId>org.littleshoot</groupId>
+            <artifactId>littleproxy</artifactId>
+            <version>0.4-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <repositories>
+        <repository>
+            <id>littleshoot</id>
+            <name>LittleShoot Repository</name>
+            <url>http://svn.littleshoot.org/maven</url>
+        </repository>
+    </repositories>
+    
+    <inceptionYear>2011</inceptionYear>
+
+    <prerequisites>
+        <maven>2.0.4</maven>
+    </prerequisites>
+
+    <build>
+        <sourceDirectory>src/java</sourceDirectory>
+        <outputDirectory>target/classes</outputDirectory>
+        <resources>
+            <resource><directory>${project.basedir}/src/resources</directory></resource>
+            <resource><directory>${project.basedir}/src/props</directory></resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    
+                    <!-- The following force compilation with full warnings. -->
+                    <fork>true</fork>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                    <compilerArguments><Xlint/></compilerArguments>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+              <artifactId>maven-assembly-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>jar-with-dependencies</id>
+                  <phase>prepare-package</phase>
+                  <goals>
+                    <goal>single</goal>
+                  </goals>
+                  <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.debugproxy.DebugProxyMainFrm</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptors>
+                      <descriptor>src/jar-assembly.xml</descriptor>
+                    </descriptors>
+                    <!--<appendAssemblyId>false</appendAssemblyId>-->
+                    <!--<finalName>region</finalName>-->
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            
+
+            <!--<plugin>-->
+                <!--<artifactId>maven-assembly-plugin</artifactId>-->
+                <!--<configuration>-->
+                    <!--<archive>-->
+                        <!--<manifest>-->
+                            <!--<mainClass>org.debugproxy.DebugProxyMainFrm</mainClass>-->
+                        <!--</manifest>-->
+                    <!--</archive>-->
+                    <!--<descriptorRefs>-->
+                        <!--<descriptorRef>jar-with-dependencies</descriptorRef>-->
+                    <!--</descriptorRefs>-->
+                    <!--<appendAssemblyId>false</appendAssemblyId>-->
+                    <!---->
+                <!--</configuration>-->
+                <!--<executions>-->
+                  <!--<execution>-->
+                    <!--<phase>package</phase>-->
+                    <!--<goals>-->
+                      <!--<goal>single</goal>-->
+                    <!--</goals>-->
+                  <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+
+        </plugins>
+    </build>
+
+
+</project>
